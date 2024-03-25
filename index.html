@@ -1,0 +1,74 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        background-color: #ccc;
+        padding: 10px;
+    }
+    .task {
+        background-color: white;
+        padding: 5px;
+        margin: 5px 0;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center; font-weight: bold;">Todo List</h1>
+    <div class="task">
+        <input type="checkbox">
+        Task <button>X</button>
+    </div>
+    <div class="task">
+        <input type="checkbox">
+        Task <button>X</button>
+    </div>
+    <div class="task">
+        <input type="checkbox">
+        Task <button>X</button>
+    </div>
+    <div class="task">
+        <input type="checkbox">
+        Task <button>X</button>
+    </div>
+    <input type="text" placeholder="Add new task..." id="newTaskInput">
+    <button id="addTaskBtn">Add</button>
+</div>
+<script>
+    const addBtn = document.getElementById('addTaskBtn');
+    const input = document.getElementById('newTaskInput');
+    const container = document.querySelector('.container');
+
+    addBtn.addEventListener('click', function() {
+        const task = document.createElement('div');
+        task.classList.add('task');
+        task.innerHTML = `
+            <input type="checkbox">
+            ${input.value} <button>X</button>
+        `;
+        container.insertBefore(task, input);
+        input.value = '';
+        addDeleteFunctionality();
+    });
+
+    function addDeleteFunctionality() {
+        const deleteBtns = document.querySelectorAll('.task button');
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+    }
+
+    addDeleteFunctionality();
+</script>
+</body>
+</html>
